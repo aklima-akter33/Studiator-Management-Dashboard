@@ -1,0 +1,570 @@
+/* -----------------------------------------------------------
+   1. GLOBAL RESET & BASE STYLES
+----------------------------------------------------------- */
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --glass-bg: rgba(255, 255, 255, 0.12);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --overlay-dark: rgba(0, 0, 0, 0.4);
+    --accent-blue: #00c3ff;
+    --danger-red: #ff4d4d;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+    background: url('image/welcome_bg.png') no-repeat center center/cover fixed;
+    min-height: 100vh;
+    color: #ffffff;
+    overflow-x: hidden;
+    animation: fadeInBackground 1.2s ease-in-out;
+}
+
+@keyframes fadeInBackground {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* -----------------------------------------------------------
+   2. WELCOME PAGE & FLOATING NAVBAR (Logo Centered)
+----------------------------------------------------------- */
+.floating-navbar {
+    position: fixed;
+    top: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 1100px;
+    padding: 10px 30px;
+    background: var(--overlay-dark);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 50px;
+    border: 1px solid var(--glass-border);
+    z-index: 1000;
+    
+    /* Layout for centering */
+    display: flex;
+    flex-direction: column; /* Stack logo above buttons if needed, or keep row */
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 5px;
+    
+}
+
+/* Specifically targeting the navigation buttons in your header */
+.nav-buttons a, 
+.nav-buttons button {
+    display: var(--glass-border);
+    width: 80px;         /* Adjust this value to your liking */
+    text-align: center;   /* Ensures text is centered within the fixed width */
+    padding: 5px 0;      /* Keeps vertical spacing consistent */
+    border-radius: 8px;   /* Matches your existing rounded corners */
+    font-weight: 600;     /* Makes the text pop */
+    text-decoration: none;/* Removes the default link underline */
+}
+
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.glass-logo {
+    width: 70px; /* Reduced size for a smaller, cleaner look */
+    height: auto;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+    transition: transform 0.4s ease;
+}
+
+.glass-logo:hover {
+    transform: scale(1.1);
+}
+
+.hero-text h1 {
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    font-weight: 800;
+    margin-bottom: 15px;
+    text-shadow: 0 4px 15px rgb(255, 255, 255);
+    color: #000000 !important;
+}
+
+.hero-text p {
+    font-size: 1.0rem;
+    max-width: 650px;
+    margin: 0 auto 35px;
+    opacity: 0.9;
+    color: #000000 !important;
+}
+
+.hero-buttons a {
+    min-width: 150px; /* A larger width for the main action buttons */
+    display: var(--glass-border);
+    text-align: center;
+}
+
+/* -----------------------------------------------------------
+   3. DASHBOARD PAGE
+----------------------------------------------------------- */
+.dashboard-page {
+    min-height: 100vh;
+    background: url('image/dashboard.jpg') no-repeat center center/cover fixed;
+    padding-top: 120px;
+}
+
+.gradient-bg {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                url('image/dashboard.jpg') no-repeat center center/cover fixed;
+    
+    min-height: 100vh;
+    width: 100%;
+    display: block;
+}
+
+.dashboard-navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 15px 40px;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(12px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+}
+
+.logout-btn {
+    padding: 8px 18px;
+    background: var(--danger-red) !important;
+    border-radius: 10px;
+    color: white !important;
+    font-weight: bold;
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* -----------------------------------------------------------
+   4. FORMS (LOGIN, SIGNUP, ADD TASK)
+----------------------------------------------------------- */
+.form-container, .add-task-container {
+    width: 100%;
+    max-width: 450px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    padding: 10px;
+    border-radius: 25px;
+    margin: 120px auto 40px;
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+
+input, textarea, select {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 18px;
+    border-radius: 12px;
+    border: none;
+    background: rgba(255, 255, 255, 0.9) !important;
+    color: #080808 !important;
+}
+
+/* --- SIGN UP / LOGIN FORM TEXT COLORS --- */
+
+/* Targets the 'Create Account' or 'Sign Up' title */
+.form-container h2 {
+    color: #00c3ff !important; /* Changes heading to black */
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+
+/* Targets labels (like 'Username', 'Email', etc.) */
+.form-container label {
+    color: #000000 !important; /* Changes labels to black */
+    font-weight: 600;
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* Targets small text links (like 'Already have an account? Login') */
+.form-container p {
+    color: #000000 !important;
+} 
+.form-container a {
+    color: hwb(208 0% 0%) !important; /* Changes footer links to black */
+    font-weight: 500;
+}
+
+/* Changes the text color inside the input boxes while typing */
+.form-container input {
+    color: #000000 !important;
+    border: 1px solid #ccc;
+}
+
+/* -----------------------------------------------------------
+   ADD TASK PAGE & FORM CONTAINER
+----------------------------------------------------------- */
+.form-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 20px;
+}
+
+.form-container {
+    width: 100%;
+    max-width: 500px;
+    background: rgba(255, 255, 255, 0.15); /* Glass effect */
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 35px;
+    border-radius: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3)!important;
+}
+
+/* --- TEXT COLORS (BLACK) --- */
+.form-container h2 {
+    color: #000000 !important;
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.form-container label {
+    display: block;
+    color: #000000 !important; /* Labels in black */
+    font-weight: 700;
+    margin-bottom: 6px;
+    font-size: 13px;
+    text-transform: uppercase;
+}
+
+/* --- INPUT FIELDS & SELECTS --- */
+.form-container input, 
+.form-container select, 
+.form-container textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 18px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+    font-size: 15px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.form-container input:focus, 
+.form-container select:focus {
+    border-color: #000;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+/* --- GRID SYSTEM (Side-by-Side Inputs) --- */
+.row {
+    display: flex;
+    gap: 15px; /* Space between the two columns */
+}
+
+.col {
+    flex: 1; /* Ensures both columns are equal width */
+}
+
+/* --- ERROR BOX --- */
+.error-box {
+    background: rgba(255, 0, 0, 0.15);
+    border-left: 5px solid #ff0000;
+    color: #000;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.error-box ul {
+    margin: 0;
+    padding-left: 18px;
+    font-weight: 600;
+}
+
+/* --- BUTTONS --- */
+.btn--primary {
+    background: #000000 !important; /* Button black */
+    color: #ffffff !important;
+    padding: 10px;
+    margin-top: 9px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn--primary:hover {
+    background: var(--accent-blue) !important;
+    transform: translateY(-2px);
+}
+
+.btn--secondary {
+    background: transparent !important;
+    color: #000000 !important;
+    border: 1px solid #000000 !important;
+    display: block;
+    text-align: center;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.btn--secondary:hover {
+    background: var(--accent-blue) !important;
+    transform: translateY(-2px);
+}
+
+/* -----------------------------------------------------------
+   5. TASK LISTS & CARDS
+----------------------------------------------------------- */
+.tasks-list {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(15px);
+    padding: 30px;
+    border-radius: 24px;
+    width: 90%;
+    max-width: 950px;
+    margin: 20px auto;
+}
+
+.task-card {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 18px;
+    margin-bottom: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* -----------------------------------------------------------
+   6. BOOTSTRAP OVERRIDES
+----------------------------------------------------------- */
+.btn--primary {
+    background-color: white !important;
+    border: 1px solid var(--accent-blue) !important;
+    color: #0b0b0b !important;
+    border-radius: 10px !important;
+}
+
+.btn--secondary {
+    background-color: white !important;
+    border: 1px solid var(--accent-blue) !important;
+    color: #0b0b0b !important;
+    border-radius: 10px !important;
+}
+
+/* Target the 'Get Started / Create Account' button */
+.hero-buttons .btn-primary {
+    background-color: var(--accent-blue) !important;
+    border: 2px solid #000000 !important;
+    color: #fefdfd !important; /* White text on black background */
+}
+
+/* Target the 'Already have an account?' button */
+.hero-buttons .btn-secondary {
+    background-color: white !important;
+    border: 2px solid #000000 !important;
+    color: #000000 !important; /* Black text */
+    backdrop-filter: blur(5px);
+}
+
+/* Hover effects for better UX */
+.hero-buttons .btn--primary:hover {
+    background-color: var(--overlay-dark) !important;
+    transform: translateY(-2px);
+}
+
+.hero-buttons .btn-secondary:hover {
+    background-color: var(--overlay-dark) !important;
+    color: #ffffff !important;
+}
+
+/* --- NEW LINES: ADD TO BOTTOM OF STYLE.CSS --- */
+
+/* 1. Alignment for Forgot Password link */
+.flex-row-end {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 15px;
+    margin-top: -10px; /* Pulls it closer to the password field */
+}
+
+.forgot-link {
+    font-size: 13px;
+    color: #000000;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.forgot-link:hover {
+    text-decoration: underline;
+}
+
+/* 2. Force same size for all primary buttons */
+.btn-primary {
+    display: block;
+    width: 100% !important; /* Forces button to fill the container */
+    height: 50px;           /* Standardized height */
+    padding: 0;             /* Reset padding */
+    border: none;
+    background: #000;
+    color: #fff;
+    cursor: pointer;
+    font-weight: 800;
+    text-transform: uppercase;
+    border-radius: 12px;
+}
+
+/* 3. Error Box styling to match theme */
+.error-box {
+    background: rgba(255, 0, 0, 0.1);
+    border-left: 4px solid #ff0000;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    color: #b91c1c;
+    font-size: 14px;
+}
+
+/* --- PROFILE PAGE SPECIFIC STYLES --- */
+
+/* 1. The Avatar Circle */
+.profile-avatar {
+    width: 80px;
+    height: 80px;
+    background-color: #000; /* Matching the black theme */
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: 800;
+    margin: 0 auto 15px auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Targets the circular letter avatar */
+.w-20.h-20.bg-black {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    margin-bottom: 1rem;
+}
+
+/* 2. Form Section Separator */
+.profile-section-divider {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    margin: 25px 0;
+    padding-top: 15px;
+}
+
+/* Styles the line between the two forms */
+.border-b.border-black\/10 {
+    border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Styles the "Change Password" header to match your theme */
+.form-container h3 {
+    color: #000 !important;
+    font-size: 1.25rem;
+    font-weight: 800;
+    margin-top: 1rem;
+    text-transform: uppercase;
+}
+
+/* Forces all profile buttons to be identical in size */
+.btn-primary, 
+.btn-secondary {
+    display: block;
+    width: 100% !important; /* Spans full width of form */
+    height: 50px;           /* Exact same height as Login/Signup */
+    line-height: 50px;      /* Centers text vertically */
+    padding: 0 !important;
+    text-align: center;
+    border-radius: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    transition: 0.3s ease;
+}
+
+.btn-secondary {
+    background: transparent !important;
+    color: #000 !important;
+    border: 2px solid #000 !important;
+}
+
+.btn-secondary:hover {
+    background: rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Progress Bar Container */
+.progress-container {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    height: 24px;
+    width: 100%;
+    margin: 15px 0;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.1);
+}
+
+/* The Moving Bar */
+.progress-fill {
+    background: #000; /* Matching your black theme */
+    height: 100%;
+    transition: width 0.8s ease-in-out;
+}
+
+/* Flashing Reminder Badge */
+.reminder-badge {
+    background: #ff4d4d;
+    color: white;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: bold;
+    display: inline-block;
+    animation: blinker 1.5s linear infinite;
+}
+
+@keyframes blinker {
+    50% { opacity: 0.3; }
+}
